@@ -844,12 +844,9 @@ if (typeof document !== 'undefined') {
     }
   });
 
-  // Load a default user on startup
+  // Set initial form defaults on startup without blocking initial paint
   window.addEventListener('DOMContentLoaded', () => {
     usernameInput.value = 'octocat';
-    handleSearch('octocat');
-
-    // Pre-fill battle inputs with interesting defaults
     battleUser1Input.value = 'torvalds';
     battleUser2Input.value = 'gaearon';
   });

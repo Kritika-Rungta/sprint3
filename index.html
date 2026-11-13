@@ -4,10 +4,26 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dev-Detective | GitHub Profile Explorer &amp; Battle Mode</title>
-  <!-- Google Fonts: Space Mono and Inter for developer aesthetics -->
+  
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="Dev-Detective: Explore GitHub developer profiles and battle stats using vanilla JavaScript and the GitHub REST API. Inspect public repositories, sort by updates, and calculate stars.">
+  <meta name="keywords" content="GitHub API, Dev-Detective, Profile Explorer, Battle Mode, JavaScript, Web Development">
+  <meta name="author" content="Kritika Rungta">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#0d1117">
+  <link rel="canonical" href="https://kritika-rungta.github.io/sprint3/">
+
+  <!-- Favicon (Inline SVG to prevent 404 console errors in DevTools) -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔍</text></svg>">
+
+  <!-- Preconnect to Google Fonts for Faster Performance (FCP/LCP) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap">
+  </noscript>
+
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -16,11 +32,11 @@
     <header class="app-header">
       <div class="header-top">
         <div class="logo">
-          <span class="logo-icon">🔍</span>
+          <span class="logo-icon" aria-hidden="true">🔍</span>
           <h1>Dev-Detective</h1>
         </div>
 
-        <!-- Theme Switcher Toggle Button -->
+        <!-- Accessible Theme Switcher Toggle Button -->
         <button id="theme-toggle-btn" class="theme-toggle-btn" type="button" aria-label="Toggle between dark and light theme">
           <span id="theme-text" class="theme-toggle-text">LIGHT</span>
           <span id="theme-icon" class="theme-toggle-icon" aria-hidden="true">☀️</span>
@@ -45,9 +61,10 @@
       <!-- VIEW 1: Profile Explorer (Phase 1 & Phase 2)                 -->
       <!-- ============================================================ -->
       <div id="explorer-view" class="view-panel" role="tabpanel" aria-labelledby="tab-explorer">
-        <!-- Search Form -->
+        <!-- Search Form with Accessible Hidden Label -->
         <section class="search-section" aria-label="Profile Search">
           <form id="search-form" class="search-bar" novalidate>
+            <label for="username-input" class="sr-only">GitHub Username</label>
             <span class="search-icon" aria-hidden="true">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <circle cx="11" cy="11" r="8"></circle>
@@ -93,7 +110,16 @@
           <article class="profile-card">
             <!-- Profile Header: Avatar + Primary Info -->
             <div class="profile-header">
-              <img id="user-avatar" class="user-avatar" src="" alt="User avatar">
+              <img 
+                id="user-avatar" 
+                class="user-avatar" 
+                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='50' fill='%2321262d'/%3E%3C/svg%3E" 
+                alt="User avatar"
+                width="105"
+                height="105"
+                loading="lazy"
+                decoding="async"
+              >
               <div class="user-primary-info">
                 <div class="user-names">
                   <h2 id="user-name" class="user-name">Developer Name</h2>
@@ -168,7 +194,7 @@
             <p>Compare two GitHub developers head-to-head based on total repository stars!</p>
           </div>
 
-          <!-- Dual Username Form -->
+          <!-- Dual Username Form with Accessible Labels -->
           <form id="battle-form" class="battle-form" novalidate>
             <div class="battle-inputs-row">
               <div class="battle-input-group">
@@ -182,6 +208,7 @@
                     autocomplete="off" 
                     spellcheck="false" 
                     required
+                    aria-label="First fighter GitHub username"
                   >
                 </div>
               </div>
@@ -199,6 +226,7 @@
                     autocomplete="off" 
                     spellcheck="false" 
                     required
+                    aria-label="Second fighter GitHub username"
                   >
                 </div>
               </div>
@@ -256,6 +284,6 @@
     </footer>
   </div>
 
-  <script src="app.js"></script>
+  <script src="app.js" defer></script>
 </body>
 </html>

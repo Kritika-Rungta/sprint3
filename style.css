@@ -13,8 +13,8 @@
   --border-focus: #58a6ff;
   
   --text-main: #f0f6fc;
-  --text-muted: #8b949e;
-  --text-dimmed: #6e7681;
+  --text-muted: #cbd5e1;
+  --text-dimmed: #94a3b8;
   --accent-blue: #238636;
   --accent-cyan: #38bdf8;
   --accent-primary: #2f81f7;
@@ -60,8 +60,8 @@
   --border-focus: #0969da;
   
   --text-main: #1f2328;
-  --text-muted: #59636e;
-  --text-dimmed: #8c959f;
+  --text-muted: #475569;
+  --text-dimmed: #64748b;
   --accent-blue: #1a7f37;
   --accent-cyan: #0284c7;
   --accent-primary: #0969da;
@@ -74,9 +74,9 @@
   --winner-bg: rgba(217, 119, 6, 0.1);
   --winner-border: rgba(217, 119, 6, 0.4);
 
-  --runner-slate: #64748b;
-  --runner-bg: rgba(100, 116, 139, 0.08);
-  --runner-border: rgba(100, 116, 139, 0.25);
+  --runner-slate: #475569;
+  --runner-bg: rgba(71, 85, 105, 0.08);
+  --runner-border: rgba(71, 85, 105, 0.25);
 
   --tie-purple: #9333ea;
   --tie-bg: rgba(147, 51, 234, 0.08);
@@ -411,9 +411,23 @@ body {
   gap: 1.75rem;
 }
 
+/* Screen reader only utility (Accessibility) */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
 .user-avatar {
   width: 105px;
   height: 105px;
+  aspect-ratio: 1 / 1;
   border-radius: var(--radius-full);
   border: 3px solid var(--border-color);
   object-fit: cover;
@@ -896,6 +910,7 @@ body {
 .fighter-avatar {
   width: 90px;
   height: 90px;
+  aspect-ratio: 1 / 1;
   border-radius: var(--radius-full);
   border: 3px solid var(--border-color);
   object-fit: cover;

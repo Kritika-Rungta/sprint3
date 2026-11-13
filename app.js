@@ -472,6 +472,10 @@ if (typeof document !== 'undefined') {
   function renderUserProfile(user) {
     userAvatar.src = user.avatar_url || 'https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png';
     userAvatar.alt = `${user.name || user.login}'s avatar`;
+    userAvatar.width = 105;
+    userAvatar.height = 105;
+    userAvatar.loading = 'lazy';
+    userAvatar.decoding = 'async';
 
     userName.textContent = user.name || user.login;
     userLogin.textContent = `@${user.login}`;
@@ -726,6 +730,10 @@ if (typeof document !== 'undefined') {
     avatar.className = 'fighter-avatar';
     avatar.src = fighter.user.avatar_url || 'https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png';
     avatar.alt = `${fighter.user.name || fighter.user.login}'s avatar`;
+    avatar.width = 90;
+    avatar.height = 90;
+    avatar.loading = 'lazy';
+    avatar.decoding = 'async';
     cardElement.appendChild(avatar);
 
     // Names

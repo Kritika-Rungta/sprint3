@@ -23,13 +23,13 @@
   --danger-bg: rgba(248, 81, 73, 0.12);
   --danger-border: rgba(248, 81, 73, 0.4);
 
-  --winner-gold: #f59e0b;
-  --winner-bg: rgba(245, 158, 11, 0.12);
-  --winner-border: rgba(245, 158, 11, 0.45);
+  --winner-color: #2ea043;
+  --winner-bg: rgba(46, 160, 67, 0.15);
+  --winner-border: rgba(46, 160, 67, 0.5);
 
-  --runner-slate: #94a3b8;
-  --runner-bg: rgba(148, 163, 184, 0.08);
-  --runner-border: rgba(148, 163, 184, 0.25);
+  --loser-color: #f85149;
+  --loser-bg: rgba(248, 81, 73, 0.14);
+  --loser-border: rgba(248, 81, 73, 0.5);
 
   --tie-purple: #a855f7;
   --tie-bg: rgba(168, 85, 247, 0.12);
@@ -70,13 +70,13 @@
   --danger-bg: rgba(207, 34, 46, 0.08);
   --danger-border: rgba(207, 34, 46, 0.3);
 
-  --winner-gold: #d97706;
-  --winner-bg: rgba(217, 119, 6, 0.1);
-  --winner-border: rgba(217, 119, 6, 0.4);
+  --winner-color: #1a7f37;
+  --winner-bg: rgba(26, 127, 55, 0.12);
+  --winner-border: rgba(26, 127, 55, 0.45);
 
-  --runner-slate: #475569;
-  --runner-bg: rgba(71, 85, 105, 0.08);
-  --runner-border: rgba(71, 85, 105, 0.25);
+  --loser-color: #cf222e;
+  --loser-bg: rgba(207, 34, 46, 0.1);
+  --loser-border: rgba(207, 34, 46, 0.4);
 
   --tie-purple: #9333ea;
   --tie-bg: rgba(147, 51, 234, 0.08);
@@ -865,13 +865,14 @@ body {
 }
 
 .fighter-card.is-winner {
-  border-color: var(--winner-gold);
-  box-shadow: 0 0 25px rgba(245, 158, 11, 0.2);
+  border-color: var(--winner-color);
+  box-shadow: 0 0 25px var(--winner-bg);
 }
 
+.fighter-card.is-loser,
 .fighter-card.is-runner-up {
-  border-color: var(--border-color);
-  opacity: 0.85;
+  border-color: var(--loser-color);
+  box-shadow: 0 0 20px var(--loser-bg);
 }
 
 .fighter-card.is-tie {
@@ -892,13 +893,14 @@ body {
 .fighter-badge.badge-winner {
   background-color: var(--winner-bg);
   border: 1px solid var(--winner-border);
-  color: var(--winner-gold);
+  color: var(--winner-color);
 }
 
+.fighter-badge.badge-loser,
 .fighter-badge.badge-runner-up {
-  background-color: var(--runner-bg);
-  border: 1px solid var(--runner-border);
-  color: var(--runner-slate);
+  background-color: var(--loser-bg);
+  border: 1px solid var(--loser-border);
+  color: var(--loser-color);
 }
 
 .fighter-badge.badge-tie {

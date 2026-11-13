@@ -98,21 +98,21 @@ async function runAsyncTest(testName, fn) {
     totalStars: 2500
   };
 
-  runTest('Correctly identifies Fighter 1 as winner when stars1 > stars2', () => {
+  runTest('Correctly identifies Fighter 1 as winner and Fighter 2 as loser when stars1 > stars2', () => {
     const outcome = determineBattleOutcome(fighterA, fighterB);
     assert.strictEqual(outcome.isTie, false);
     assert.strictEqual(outcome.winner.user.login, 'alice');
-    assert.strictEqual(outcome.runnerUp.user.login, 'bob');
+    assert.strictEqual(outcome.loser.user.login, 'bob');
     assert.strictEqual(outcome.fighter1Status, 'winner');
-    assert.strictEqual(outcome.fighter2Status, 'runner-up');
+    assert.strictEqual(outcome.fighter2Status, 'loser');
   });
 
-  runTest('Correctly identifies Fighter 2 as winner when stars2 > stars1', () => {
+  runTest('Correctly identifies Fighter 2 as winner and Fighter 1 as loser when stars2 > stars1', () => {
     const outcome = determineBattleOutcome(fighterB, fighterA);
     assert.strictEqual(outcome.isTie, false);
     assert.strictEqual(outcome.winner.user.login, 'alice');
-    assert.strictEqual(outcome.runnerUp.user.login, 'bob');
-    assert.strictEqual(outcome.fighter1Status, 'runner-up');
+    assert.strictEqual(outcome.loser.user.login, 'bob');
+    assert.strictEqual(outcome.fighter1Status, 'loser');
     assert.strictEqual(outcome.fighter2Status, 'winner');
   });
 

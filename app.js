@@ -160,9 +160,10 @@ function determineBattleOutcome(fighter1, fighter2) {
     return {
       winner: fighter1,
       runnerUp: fighter2,
+      loser: fighter2,
       isTie: false,
       fighter1Status: 'winner',
-      fighter2Status: 'runner-up'
+      fighter2Status: 'loser'
     };
   }
 
@@ -170,8 +171,9 @@ function determineBattleOutcome(fighter1, fighter2) {
     return {
       winner: fighter2,
       runnerUp: fighter1,
+      loser: fighter1,
       isTie: false,
-      fighter1Status: 'runner-up',
+      fighter1Status: 'loser',
       fighter2Status: 'winner'
     };
   }
@@ -180,6 +182,7 @@ function determineBattleOutcome(fighter1, fighter2) {
   return {
     winner: null,
     runnerUp: null,
+    loser: null,
     isTie: true,
     fighter1Status: 'tie',
     fighter2Status: 'tie'
@@ -717,12 +720,16 @@ if (typeof document !== 'undefined') {
     cardElement.classList.add(`is-${status}`);
     cardElement.innerHTML = '';
 
-    // Outcome Badge
+    // Outcome Badge (Green for Winner, Red for Loser, Purple for Tie)
     const badge = document.createElement('div');
     badge.className = `fighter-badge badge-${status}`;
-    if (status === 'winner') badge.textContent = '🏆 WINNER';
-    else if (status === 'runner-up') badge.textContent = '🥈 RUNNER-UP';
-    else badge.textContent = '🤝 TIE';
+    if (status === 'winner') {
+      badge.textContent = '🏆 WINNER';
+    } else if (status === 'loser' || status === 'runner-up') {
+      badge.textContent = '❌ LOSER';
+    } else {
+      badge.textContent = '🤝 TIE';
+    }
     cardElement.appendChild(badge);
 
     // Avatar

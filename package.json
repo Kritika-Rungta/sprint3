@@ -4,10 +4,11 @@
   "description": "Dev-Detective - ProDesk IT Sprint 03: GitHub Profile Explorer & Battle Mode built with Vanilla JavaScript, HTML5 & CSS3",
   "main": "app.js",
   "scripts": {
-    "test": "node tests/phase1.test.js && node tests/phase2.test.js && node tests/phase3.test.js",
+    "test": "node tests/phase1.test.js && node tests/phase2.test.js && node tests/phase3.test.js && node tests/theme.test.js",
     "test:phase1": "node tests/phase1.test.js",
     "test:phase2": "node tests/phase2.test.js",
     "test:phase3": "node tests/phase3.test.js",
+    "test:theme": "node tests/theme.test.js",
     "start": "node serve.js"
   },
   "keywords": [
@@ -22,3 +23,4 @@
   "author": "ProDesk IT Sprint 03",
   "license": "MIT"
 }
+

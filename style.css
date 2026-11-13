@@ -4,8 +4,8 @@
    Phase 1 (Explorer), Phase 2 (Repositories), Phase 3 (Battle Mode)
    ========================================================================== */
 
-/* Design Tokens & Theme Variables */
-:root {
+/* Design Tokens & Theme Variables (Default Dark Theme) */
+:root, [data-theme="dark"] {
   --bg-primary: #0d1117;
   --bg-secondary: #161b22;
   --bg-tertiary: #21262d;
@@ -51,6 +51,42 @@
   --transition-normal: 0.25s ease;
 }
 
+/* Light Theme Tokens */
+[data-theme="light"] {
+  --bg-primary: #f6f8fa;
+  --bg-secondary: #ffffff;
+  --bg-tertiary: #f0f3f6;
+  --border-color: #d0d7de;
+  --border-focus: #0969da;
+  
+  --text-main: #1f2328;
+  --text-muted: #59636e;
+  --text-dimmed: #8c959f;
+  --accent-blue: #1a7f37;
+  --accent-cyan: #0284c7;
+  --accent-primary: #0969da;
+  --accent-hover: #0550ae;
+  --danger-color: #cf222e;
+  --danger-bg: rgba(207, 34, 46, 0.08);
+  --danger-border: rgba(207, 34, 46, 0.3);
+
+  --winner-gold: #d97706;
+  --winner-bg: rgba(217, 119, 6, 0.1);
+  --winner-border: rgba(217, 119, 6, 0.4);
+
+  --runner-slate: #64748b;
+  --runner-bg: rgba(100, 116, 139, 0.08);
+  --runner-border: rgba(100, 116, 139, 0.25);
+
+  --tie-purple: #9333ea;
+  --tie-bg: rgba(147, 51, 234, 0.08);
+  --tie-border: rgba(147, 51, 234, 0.35);
+
+  --shadow-sm: 0 1px 3px rgba(31, 35, 40, 0.12), 0 8px 24px rgba(66, 74, 83, 0.12);
+  --shadow-md: 0 8px 24px rgba(140, 149, 159, 0.2);
+  --shadow-glow: 0 0 20px rgba(9, 105, 218, 0.12);
+}
+
 /* Base Reset & Box Sizing */
 *, *::before, *::after {
   box-sizing: border-box;
@@ -84,9 +120,15 @@ body {
 .app-header {
   display: flex;
   flex-direction: column;
+  gap: 0.6rem;
+  width: 100%;
+}
+
+.header-top {
+  display: flex;
   align-items: center;
-  text-align: center;
-  gap: 0.5rem;
+  justify-content: space-between;
+  width: 100%;
 }
 
 .logo {
@@ -108,9 +150,40 @@ body {
   color: var(--text-main);
 }
 
+/* Theme Switcher Button */
+.theme-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-full);
+  padding: 0.4rem 0.95rem;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  box-shadow: var(--shadow-sm);
+}
+
+.theme-toggle-btn:hover {
+  color: var(--text-main);
+  border-color: var(--accent-primary);
+  transform: translateY(-1px);
+}
+
+.theme-toggle-icon {
+  font-size: 1rem;
+  line-height: 1;
+}
+
 .tagline {
   color: var(--text-muted);
   font-size: 0.95rem;
+  text-align: center;
 }
 
 /* Navigation Tabs (Explorer vs Battle Mode) */

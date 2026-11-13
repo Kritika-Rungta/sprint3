@@ -11,6 +11,26 @@
 // =============================================================================
 
 /**
+ * Normalizes a theme string to ensure it is either 'dark' or 'light'.
+ *
+ * @param {string} theme - Raw theme string
+ * @returns {'dark'|'light'} Validated theme
+ */
+function normalizeTheme(theme) {
+  return theme === 'light' ? 'light' : 'dark';
+}
+
+/**
+ * Returns the opposite theme for toggling.
+ *
+ * @param {'dark'|'light'} currentTheme
+ * @returns {'dark'|'light'}
+ */
+function getOppositeTheme(currentTheme) {
+  return currentTheme === 'light' ? 'dark' : 'light';
+}
+
+/**
  * Formats an ISO 8601 date string (e.g., "2011-01-25T18:44:36Z")
  * into a human-friendly format: "Joined 25 Jan 2011".
  *
@@ -297,6 +317,70 @@ if (typeof document !== 'undefined') {
   const tabBattle = document.getElementById('tab-battle');
   const explorerView = document.getElementById('explorer-view');
   const battleView = document.getElementById('battle-view');
+
+  // Theme Switcher Elements
+  const themeToggleBtn = document.getElementById('theme-toggle-btn');
+  const themeText = document.getElementById('theme-text');
+  const themeIcon = document.getElementById('theme-icon');
+
+  /**
+   * Applies the theme to the document and updates button UI.
+   *
+   * @param {'dark'|'light'} theme
+   */
+  function applyTheme(theme) {
+    const validTheme = normalizeTheme(theme);
+    document.documentElement.setAttribute('data-theme', validTheme);
+
+    if (validTheme === 'light') {
+      themeText.textContent = 'DARK';
+      themeIcon.textContent = '🌙';
+    } else {
+      themeText.textContent = 'LIGHT';
+      themeIcon.textContent = '☀️';
+    }
+
+    try {
+      localStorage.setItem('dev_detective_theme', validTheme);
+    } catch (e) {
+      // Gracefully handle storage quota or private browsing mode
+    }
+  }
+
+  /**
+   * Retrieves stored theme preference or falls back to system preference.
+   */
+  function initTheme() {
+    let savedTheme = null;
+    try {
+      savedTheme = localStorage.getItem('dev_detective_theme');
+    } catch (e) {
+      savedTheme = null;
+    }
+
+    if (savedTheme === 'light' || savedTheme === 'dark') {
+      applyTheme(savedTheme);
+      return;
+    }
+
+    // Check system preference
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+      applyTheme('light');
+    } else {
+      applyTheme('dark');
+    }
+  }
+
+  if (themeToggleBtn) {
+    themeToggleBtn.addEventListener('click', () => {
+      const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+      const newTheme = getOppositeTheme(currentTheme);
+      applyTheme(newTheme);
+    });
+  }
+
+  // Initialize theme on script run
+  initTheme();
 
   // Tab Switching Handler
   tabExplorer.addEventListener('click', () => {
@@ -768,6 +852,8 @@ if (typeof document !== 'undefined') {
 // =============================================================================
 if (typeof module !== 'undefined' && module.exports) {
   module.exports = {
+    normalizeTheme,
+    getOppositeTheme,
     formatJoinDate,
     formatRepoDate,
     formatPortfolioUrl,

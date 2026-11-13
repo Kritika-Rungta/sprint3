@@ -157,6 +157,10 @@ document.documentElement.setAttribute('data-theme', 'light');
 }
 ```
 
+### Problem 6: Strict Rule 4 Compliance (Zero Hardcoded API Data)
+- **Challenge**: To achieve a 100 Lighthouse performance score initially, static fallback data was embedded directly inside `index.html`. While fast, this violated Sprint Rule 4 ("Do not hardcode API response data").
+- **Solution**: Replaced hardcoded Octocat DOM elements with clean semantic skeleton placeholders (`class="hidden"`) and attached dynamic invocation of `handleSearch('octocat')` on `DOMContentLoaded`. Now 100% of profile and repository cards are rendered exclusively from live GitHub REST API responses.
+
 ---
 
 ## 📊 4. Final Quality Assurance Checklist

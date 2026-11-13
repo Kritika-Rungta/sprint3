@@ -851,11 +851,12 @@ if (typeof document !== 'undefined') {
     }
   });
 
-  // Set initial form defaults on startup without blocking initial paint
+  // Set initial form defaults on startup and fetch initial profile dynamically from GitHub REST API
   window.addEventListener('DOMContentLoaded', () => {
     usernameInput.value = 'octocat';
     battleUser1Input.value = 'torvalds';
     battleUser2Input.value = 'gaearon';
+    handleSearch('octocat');
   });
 }
 

@@ -103,48 +103,48 @@
           </div>
         </div>
 
-        <!-- Profile Display Card (Instant Pre-rendered for 100% Performance) -->
-        <section id="profile-container" class="profile-section" aria-label="GitHub User Profile">
+        <!-- Profile Display Card (Dynamically Populated by Phase 1 & 2 JS) -->
+        <section id="profile-container" class="profile-section hidden" aria-label="GitHub User Profile">
           <article class="profile-card">
             <!-- Profile Header: Avatar + Primary Info -->
             <div class="profile-header">
               <img 
                 id="user-avatar" 
                 class="user-avatar" 
-                src="https://avatars.githubusercontent.com/u/583231?v=4" 
-                alt="The Octocat's avatar"
+                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%231f2937'/%3E%3C/svg%3E" 
+                alt="Developer Avatar"
                 width="105"
                 height="105"
-                loading="eager"
+                loading="lazy"
                 decoding="async"
               >
               <div class="user-primary-info">
                 <div class="user-names">
-                  <h2 id="user-name" class="user-name">The Octocat</h2>
-                  <a id="user-login" class="user-handle" href="https://github.com/octocat" target="_blank" rel="noopener noreferrer">@octocat</a>
+                  <h2 id="user-name" class="user-name"></h2>
+                  <a id="user-login" class="user-handle" href="#" target="_blank" rel="noopener noreferrer"></a>
                 </div>
-                <p id="user-joined" class="user-joined">Joined 25 Jan 2011</p>
+                <p id="user-joined" class="user-joined"></p>
               </div>
             </div>
 
             <!-- User Bio -->
             <div class="profile-bio-container">
-              <p id="user-bio" class="user-bio is-empty">This profile has no bio</p>
+              <p id="user-bio" class="user-bio"></p>
             </div>
 
             <!-- User Stats Bar (Repos, Followers, Following) -->
             <div class="profile-stats">
               <div class="stat-item">
                 <span class="stat-label">Repos</span>
-                <strong id="stat-repos" class="stat-value">8</strong>
+                <strong id="stat-repos" class="stat-value">0</strong>
               </div>
               <div class="stat-item">
                 <span class="stat-label">Followers</span>
-                <strong id="stat-followers" class="stat-value">25144</strong>
+                <strong id="stat-followers" class="stat-value">0</strong>
               </div>
               <div class="stat-item">
                 <span class="stat-label">Following</span>
-                <strong id="stat-following" class="stat-value">9</strong>
+                <strong id="stat-following" class="stat-value">0</strong>
               </div>
             </div>
 
@@ -152,70 +152,30 @@
             <ul class="profile-metadata" aria-label="User contact and social links">
               <li id="meta-location-item" class="meta-item">
                 <span class="meta-icon" aria-hidden="true">📍</span>
-                <span id="user-location" class="meta-text">San Francisco</span>
+                <span id="user-location" class="meta-text"></span>
               </li>
               <li id="meta-portfolio-item" class="meta-item">
                 <span class="meta-icon" aria-hidden="true">🔗</span>
-                <a id="user-portfolio" class="meta-link" href="https://github.blog" target="_blank" rel="noopener noreferrer">https://github.blog</a>
+                <a id="user-portfolio" class="meta-link" target="_blank" rel="noopener noreferrer"></a>
               </li>
-              <li id="meta-twitter-item" class="meta-item is-unavailable">
+              <li id="meta-twitter-item" class="meta-item">
                 <span class="meta-icon" aria-hidden="true">🐦</span>
-                <a id="user-twitter" class="meta-link" target="_blank" rel="noopener noreferrer">Not Available</a>
+                <a id="user-twitter" class="meta-link" target="_blank" rel="noopener noreferrer"></a>
               </li>
               <li id="meta-company-item" class="meta-item">
                 <span class="meta-icon" aria-hidden="true">🏢</span>
-                <span id="user-company" class="meta-text">@github</span>
+                <span id="user-company" class="meta-text"></span>
               </li>
             </ul>
 
             <!-- Phase 2: Latest Repositories Section -->
-            <section id="repos-section" class="repos-section" aria-label="Latest Public Repositories">
+            <section id="repos-section" class="repos-section hidden" aria-label="Latest Public Repositories">
               <div class="repos-header">
                 <h3 class="repos-title">Latest Repositories</h3>
                 <span class="repos-badge">Top 5 by latest update</span>
               </div>
               <div id="repos-list" class="repos-list">
-                <article class="repo-card">
-                  <div class="repo-card-top">
-                    <a class="repo-name-link" href="https://github.com/octocat/Spoon-Knife" target="_blank" rel="noopener noreferrer">Spoon-Knife</a>
-                    <span class="repo-visibility">public</span>
-                  </div>
-                  <p class="repo-description">This repo is for demonstration purposes only.</p>
-                  <div class="repo-meta">
-                    <span class="repo-meta-item"><span class="repo-lang-dot"></span>HTML</span>
-                    <span class="repo-meta-item">⭐ 13,420</span>
-                    <span class="repo-meta-item">🍴 145,200</span>
-                    <span class="repo-meta-item repo-date">Updated 10 Nov 2024</span>
-                  </div>
-                </article>
-
-                <article class="repo-card">
-                  <div class="repo-card-top">
-                    <a class="repo-name-link" href="https://github.com/octocat/octocat.github.io" target="_blank" rel="noopener noreferrer">octocat.github.io</a>
-                    <span class="repo-visibility">public</span>
-                  </div>
-                  <p class="repo-description">The public website for octocat.</p>
-                  <div class="repo-meta">
-                    <span class="repo-meta-item"><span class="repo-lang-dot"></span>CSS</span>
-                    <span class="repo-meta-item">⭐ 2,450</span>
-                    <span class="repo-meta-item">🍴 1,890</span>
-                    <span class="repo-meta-item repo-date">Updated 24 Oct 2024</span>
-                  </div>
-                </article>
-
-                <article class="repo-card">
-                  <div class="repo-card-top">
-                    <a class="repo-name-link" href="https://github.com/octocat/git-consortium" target="_blank" rel="noopener noreferrer">git-consortium</a>
-                    <span class="repo-visibility">public</span>
-                  </div>
-                  <p class="repo-description">This repo is for demonstration purposes only.</p>
-                  <div class="repo-meta">
-                    <span class="repo-meta-item"><span class="repo-lang-dot"></span>Ruby</span>
-                    <span class="repo-meta-item">⭐ 580</span>
-                    <span class="repo-meta-item">🍴 412</span>
-                    <span class="repo-meta-item repo-date">Updated 15 Sep 2024</span>
-                  </div>
-                </article>
+                <!-- Dynamically populated by Phase 2 JS -->
               </div>
             </section>
           </article>

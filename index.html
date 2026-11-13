@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dev-Detective | GitHub Profile Explorer &amp; Battle Mode</title>
+  <!-- Google Fonts: Space Mono and Inter for developer aesthetics -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="logo">
+        <span class="logo-icon">🔍</span>
+        <h1>Dev-Detective</h1>
+      </div>
+      <p class="tagline">Explore GitHub developers &amp; inspect public profiles</p>
+
+      <!-- Navigation Tabs: Explorer vs Battle Mode -->
+      <nav class="mode-tabs" role="tablist" aria-label="Application Mode">
+        <button id="tab-explorer" class="tab-btn active" role="tab" aria-selected="true" aria-controls="explorer-view">
+          <span>🔍 Profile Explorer</span>
+        </button>
+        <button id="tab-battle" class="tab-btn" role="tab" aria-selected="false" aria-controls="battle-view">
+          <span>⚔️ Battle Mode</span>
+        </button>
+      </nav>
+    </header>
+
+    <main class="main-content">
+      <!-- ============================================================ -->
+      <!-- VIEW 1: Profile Explorer (Phase 1 & Phase 2)                 -->
+      <!-- ============================================================ -->
+      <div id="explorer-view" class="view-panel" role="tabpanel" aria-labelledby="tab-explorer">
+        <!-- Search Form -->
+        <section class="search-section" aria-label="Profile Search">
+          <form id="search-form" class="search-bar" novalidate>
+            <span class="search-icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+            </span>
+            <input 
+              type="text" 
+              id="username-input" 
+              class="search-input" 
+              placeholder="Enter a GitHub username (e.g. octocat, torvalds)..." 
+              autocomplete="off" 
+              spellcheck="false"
+              required
+              aria-label="GitHub username"
+            >
+            <button type="submit" id="search-btn" class="btn btn-primary">
+              <span>Search</span>
+            </button>
+          </form>
+        </section>
+
+        <!-- Status Messages: Loading, 404, Rate Limit & Errors -->
+        <div id="status-container" class="status-container" aria-live="polite">
+          <!-- Loading State Indicator -->
+          <div id="loading-spinner" class="loading-state hidden">
+            <div class="spinner" role="status" aria-label="Loading profile"></div>
+            <p class="status-text">Investigating GitHub records...</p>
+          </div>
+
+          <!-- Error State Message (404, Rate Limit, Network) -->
+          <div id="error-message" class="error-banner hidden" role="alert">
+            <span class="error-icon" aria-hidden="true">⚠️</span>
+            <div class="error-content">
+              <h3 id="error-title" class="error-title">User Not Found</h3>
+              <p id="error-desc" class="error-desc">We couldn't locate that GitHub account. Please check the spelling and try again.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Profile Display Card -->
+        <section id="profile-container" class="profile-section hidden" aria-label="GitHub User Profile">
+          <article class="profile-card">
+            <!-- Profile Header: Avatar + Primary Info -->
+            <div class="profile-header">
+              <img id="user-avatar" class="user-avatar" src="" alt="User avatar">
+              <div class="user-primary-info">
+                <div class="user-names">
+                  <h2 id="user-name" class="user-name">Developer Name</h2>
+                  <a id="user-login" class="user-handle" href="#" target="_blank" rel="noopener noreferrer">@username</a>
+                </div>
+                <p id="user-joined" class="user-joined">Joined 25 Jan 2011</p>
+              </div>
+            </div>
+
+            <!-- User Bio -->
+            <div class="profile-bio-container">
+              <p id="user-bio" class="user-bio">This profile has no bio</p>
+            </div>
+
+            <!-- User Stats Bar (Repos, Followers, Following) -->
+            <div class="profile-stats">
+              <div class="stat-item">
+                <span class="stat-label">Repos</span>
+                <strong id="stat-repos" class="stat-value">0</strong>
+              </div>
+              <div class="stat-item">
+                <span class="stat-label">Followers</span>
+                <strong id="stat-followers" class="stat-value">0</strong>
+              </div>
+              <div class="stat-item">
+                <span class="stat-label">Following</span>
+                <strong id="stat-following" class="stat-value">0</strong>
+              </div>
+            </div>
+
+            <!-- User Details / Metadata (Location, Portfolio, Twitter, Company) -->
+            <ul class="profile-metadata" aria-label="User contact and social links">
+              <li id="meta-location-item" class="meta-item">
+                <span class="meta-icon" aria-hidden="true">📍</span>
+                <span id="user-location" class="meta-text">Not Available</span>
+              </li>
+              <li id="meta-portfolio-item" class="meta-item">
+                <span class="meta-icon" aria-hidden="true">🔗</span>
+                <a id="user-portfolio" class="meta-link" href="#" target="_blank" rel="noopener noreferrer">Not Available</a>
+              </li>
+              <li id="meta-twitter-item" class="meta-item">
+                <span class="meta-icon" aria-hidden="true">🐦</span>
+                <a id="user-twitter" class="meta-link" href="#" target="_blank" rel="noopener noreferrer">Not Available</a>
+              </li>
+              <li id="meta-company-item" class="meta-item">
+                <span class="meta-icon" aria-hidden="true">🏢</span>
+                <span id="user-company" class="meta-text">Not Available</span>
+              </li>
+            </ul>
+
+            <!-- Phase 2: Latest Repositories Section -->
+            <section id="repos-section" class="repos-section hidden" aria-label="Latest Public Repositories">
+              <div class="repos-header">
+                <h3 class="repos-title">Latest Repositories</h3>
+                <span class="repos-badge">Top 5 by latest update</span>
+              </div>
+              <div id="repos-list" class="repos-list">
+                <!-- Repositories dynamically populated by JavaScript in Phase 2 -->
+              </div>
+            </section>
+          </article>
+        </section>
+      </div>
+
+      <!-- ============================================================ -->
+      <!-- VIEW 2: Battle Mode (Phase 3)                                -->
+      <!-- ============================================================ -->
+      <div id="battle-view" class="view-panel hidden" role="tabpanel" aria-labelledby="tab-battle">
+        <section class="battle-section" aria-label="Developer Battle">
+          <div class="battle-intro">
+            <h2>Developer Star Battle ⚔️</h2>
+            <p>Compare two GitHub developers head-to-head based on total repository stars!</p>
+          </div>
+
+          <!-- Dual Username Form -->
+          <form id="battle-form" class="battle-form" novalidate>
+            <div class="battle-inputs-row">
+              <div class="battle-input-group">
+                <label for="battle-user-1" class="battle-label">Fighter 1</label>
+                <div class="search-bar">
+                  <input 
+                    type="text" 
+                    id="battle-user-1" 
+                    class="search-input" 
+                    placeholder="Enter first username..." 
+                    autocomplete="off" 
+                    spellcheck="false" 
+                    required
+                  >
+                </div>
+              </div>
+
+              <div class="battle-vs-badge" aria-hidden="true">VS</div>
+
+              <div class="battle-input-group">
+                <label for="battle-user-2" class="battle-label">Fighter 2</label>
+                <div class="search-bar">
+                  <input 
+                    type="text" 
+                    id="battle-user-2" 
+                    class="search-input" 
+                    placeholder="Enter second username..." 
+                    autocomplete="off" 
+                    spellcheck="false" 
+                    required
+                  >
+                </div>
+              </div>
+            </div>
+
+            <button type="submit" id="battle-submit-btn" class="btn btn-primary btn-battle">
+              <span>⚔️ Commence Battle!</span>
+            </button>
+          </form>
+
+          <!-- Battle Status Container -->
+          <div id="battle-status-container" class="status-container" aria-live="polite">
+            <div id="battle-loading" class="loading-state hidden">
+              <div class="spinner" role="status" aria-label="Loading battle data"></div>
+              <p class="status-text">Fetching profiles and summing repository stars concurrently via Promise.all()...</p>
+            </div>
+
+            <div id="battle-error" class="error-banner hidden" role="alert">
+              <span class="error-icon" aria-hidden="true">⚠️</span>
+              <div class="error-content">
+                <h3 id="battle-error-title" class="error-title">Battle Error</h3>
+                <p id="battle-error-desc" class="error-desc"></p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Battle Arena Results -->
+          <section id="battle-results" class="battle-results-container hidden" aria-label="Battle Results">
+            <!-- Verdict Banner (Winner, Runner-up, or Tie announcement) -->
+            <div id="battle-verdict-banner" class="battle-verdict-banner">
+              <span id="battle-verdict-icon" class="verdict-icon">🏆</span>
+              <div class="verdict-content">
+                <h3 id="battle-verdict-title" class="verdict-title">Winner Declared!</h3>
+                <p id="battle-verdict-desc" class="verdict-desc">Results based on total stars earned across public repositories.</p>
+              </div>
+            </div>
+
+            <!-- Two Fighter Cards -->
+            <div class="battle-arena-grid">
+              <article id="fighter-card-1" class="fighter-card">
+                <!-- Dynamically populated by Phase 3 JS -->
+              </article>
+              <article id="fighter-card-2" class="fighter-card">
+                <!-- Dynamically populated by Phase 3 JS -->
+              </article>
+            </div>
+          </section>
+        </section>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+      <p>Dev-Detective &bull; ProDesk IT Sprint 03 &bull; Built with Vanilla JavaScript</p>
+    </footer>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
